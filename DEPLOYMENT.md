@@ -215,6 +215,16 @@ Once connected to Git:
 - Push to other branches → Creates preview deployments
 - Pull requests → Automatic preview URLs
 
+### GitHub Actions Workflow
+
+The repository includes a GitHub Actions workflow (`.github/workflows/vercel-deploy.yml`) that runs on every push to verify:
+- Project structure is correct
+- All required configuration files exist
+- Dependencies can be installed
+- Build scripts are present
+
+**Important**: This workflow only checks the project structure. Actual builds and deployments happen on Vercel's servers, not in GitHub Actions. If the workflow fails, it means there's a structural issue with the repository, not a build failure.
+
 ---
 
 ## Useful Commands

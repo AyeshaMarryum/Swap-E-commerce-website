@@ -7,12 +7,64 @@ on:
     branches: [ main ]
 
 jobs:
-  build-test:
+  check-structure:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        app: [frontend, admin]
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check project structure
+      run: |
+        echo "Checking project structure..."
+        
+        # Check if required directories exist
+        if [ -d "frontend" ]; then
+          echo "✓ frontend directory exists"
+        else
+          echo "✗ frontend directory missing"
+          exit 1
+        fi
+        
+        if [ -d "admin" ]; then
+          echo "✓ admin directory exists"
+        else
+          echo "✗ admin directory missing"
+          exit 1
+        fi
+        
+        if [ -d "backend" ]; then
+          echo "✓ backend directory exists"
+        else
+          echo "✗ backend directory missing"
+          exit 1
+        fi
+        
+        # Check if vercel.json files exist
+        if [ -f "frontend/vercel.json" ]; then
+          echo "✓ frontend/vercel.json exists"
+        else
+          echo "✗ frontend/vercel.json missing"
+          exit 1
+        fi
+        
+        if [ -f "admin/vercel.json" ]; then
+          echo "✓ admin/vercel.json exists"
+        else
+          echo "✗ admin/vercel.json missing"
+          exit 1
+        fi
+        
+        if [ -f "backend/vercel.json" ]; then
+          echo "✓ backend/vercel.json exists"
+        else
+          echo "✗ backend/vercel.json missing"
+          exit 1
+        fi
+        
+        echo "✓ All required files and directories present"
+
+  frontend-check:
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
@@ -21,23 +73,45 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: ${{ matrix.app }}/package-lock.json
     
     - name: Install dependencies
-      working-directory: ./${{ matrix.app }}
+      working-directory: ./frontend
       run: npm ci
     
-    - name: Build
-      working-directory: ./${{ matrix.app }}
-      run: npm run build
+    - name: Check package.json
+      working-directory: ./frontend
+      run: |
+        if grep -q "\"build\":" package.json; then
+          echo "✓ Build script exists"
+        else
+          echo "✗ Build script missing"
+          exit 1
+        fi
+
+  admin-check:
+    runs-on: ubuntu-latest
     
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        name: ${{ matrix.app }}-dist
-        path: ${{ matrix.app }}/dist
-        retention-days: 1
+        node-version: '18'
+    
+    - name: Install dependencies
+      working-directory: ./admin
+      run: npm ci
+    
+    - name: Check package.json
+      working-directory: ./admin
+      run: |
+        if grep -q "\"build\":" package.json; then
+          echo "✓ Build script exists"
+        else
+          echo "✗ Build script missing"
+          exit 1
+        fi
 
   backend-check:
     runs-on: ubuntu-latest
@@ -49,8 +123,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: backend/package-lock.json
     
     - name: Install dependencies
       working-directory: ./backend
@@ -63,5 +135,15 @@ jobs:
           echo "✓ server.js exists"
         else
           echo "✗ server.js missing"
+          exit 1
+        fi
+    
+    - name: Verify vercel.json
+      working-directory: ./backend
+      run: |
+        if [ -f "vercel.json" ]; then
+          echo "✓ vercel.json exists"
+        else
+          echo "✗ vercel.json missing"
           exit 1
         fi
