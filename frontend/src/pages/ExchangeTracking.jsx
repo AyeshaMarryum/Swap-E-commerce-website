@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../Components/Title";
 import { ShopContext } from "../Context/ShopContext";
@@ -261,7 +261,7 @@ const ExchangeTracking = () => {
       <div className="border-t pt-16 text-center">
         <div className="text-6xl mb-4">📦</div>
         <p className="text-lg text-gray-700 mb-4">No exchange requests found</p>
-        <p className="text-gray-500 text-sm mb-6">You haven't submitted any exchange requests yet</p>
+        <p className="text-gray-500 text-sm mb-6">You havent submitted any exchange requests yet</p>
         <button
           onClick={() => navigate("/exchange")}
           className="bg-black text-white px-6 py-2 text-sm rounded hover:bg-gray-800"

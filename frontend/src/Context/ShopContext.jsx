@@ -19,6 +19,9 @@ const ShopContextProvider = (props) => {
   const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
 
+  console.log("loadingCart",loadingCart);
+  
+
   const updateQuantity = async (itemId, size, quantity) => {
     let cartData = structuredClone(cartItems);
     cartData[itemId][size] = quantity;
@@ -98,7 +101,10 @@ const ShopContextProvider = (props) => {
           if (cartItems[items][item] > 0) {
             totalCount += cartItems[items][item];
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log("Error calculating cart count:", error);
+          
+        }
       }
     }
     return totalCount;

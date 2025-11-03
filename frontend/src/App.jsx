@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes,Route } from 'react-router-dom'
 import Collection from './pages/Collection'
 import About from './pages/About'
@@ -16,7 +15,7 @@ import ExchangeSystem from './pages/ExchangeSystem'
 import ExchangeTracking from './pages/ExchangeTracking'
 import Profile from './pages/Profile'
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Verify from './pages/Verify'
 function App() {
   return (

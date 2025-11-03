@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import Title from '../Components/Title'; // Ensure the `Title` component is correctly imported
 import CartTotalSimple from '../Components/CartTotalSimple'; // Use simple version without credits
@@ -12,9 +12,6 @@ const Cart = () => {
   
 
   useEffect(() => {
-    if (products.length > 0) {
-
-    }
     const tempData = [];
     for (const items in cartItems) {
       for (const item in cartItems[items]) {

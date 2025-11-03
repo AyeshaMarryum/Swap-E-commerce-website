@@ -27,7 +27,15 @@ connectCloudinary()
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+  credentials: true
+}))
+
+// Handle preflight requests for all routes
+app.options('*', cors())
 
 // API routes
 app.use('/api/dashboard', dashboardRoutes);
@@ -44,9 +52,13 @@ app.get('/', (req, res) => {
 })
 
 // Start server
-app.listen(port, () => {
-  console.log('Server Started on Port : ' + port)
-  console.log("MongoDB URI from env:", process.env.MONGODB_URI);
-  console.log("JWT_SECRET present:", !!process.env.JWT_SECRET);
-  console.log("JWT_SECRET length:", process.env.JWT_SECRET ? process.env.JWT_SECRET.length : 0);
-})
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log('Server Started on Port : ' + port)
+    console.log("MongoDB URI from env:", process.env.MONGODB_URI);
+    console.log("JWT_SECRET present:", !!process.env.JWT_SECRET);
+    console.log("JWT_SECRET length:", process.env.JWT_SECRET ? process.env.JWT_SECRET.length : 0);
+  })
+}
+
+export default app;

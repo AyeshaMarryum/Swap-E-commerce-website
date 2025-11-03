@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Title from '../Components/Title';  
 import { assets } from '../assets/assets';
 import NewsletterBox from '../Components/NewsletterBox.jsx';

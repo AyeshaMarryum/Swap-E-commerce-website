@@ -1,4 +1,3 @@
-import React from 'react';
 import Title from '../Components/Title';  
 import { assets } from '../assets/assets';
 import NewsletterBox from '../Components/NewsletterBox.jsx'
@@ -17,7 +16,7 @@ const About = () => {
           <p>Swap was founded out of a passion for innovation and a desire to revolutionize the way people shop online.Their journey began with a simple idea: to provide a platform where customers can easily discover, explore, and purchase a wide range of products from the comfort of their homes.</p>
           <p>Since their inception, they have worked tirelessly to curate a diverse selection of high-quality products that cater to every taste and preference.Their offerings range from fashion and beauty to electronics and home essentials, all sourced from trusted brands and suppliers.</p>
           <b className='text-gray-800'>Our Mission</b>
-          <p>Swap's mission is to empower customers with choice, convenience, and confidence.They are dedicated to providing a seamless shopping experience that exceeds expectations, from browsing and ordering to delivery and beyond.</p>
+          <p>Swaps mission is to empower customers with choice, convenience, and confidence.They are dedicated to providing a seamless shopping experience that exceeds expectations, from browsing and ordering to delivery and beyond.</p>
         </div>
       </div>
 

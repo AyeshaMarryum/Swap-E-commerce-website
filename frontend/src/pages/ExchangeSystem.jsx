@@ -1,13 +1,13 @@
 
 
-import React, { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import PriceAdjustmentModal from "./PriceAdjustmentModel.jsx";
 import { ShopContext } from "../Context/ShopContext";
 import useSentiment from "../hooks/useSentiment";
 
 
 const ExchangeSystem = () => {
-  const { orders, products, requestExchange, currency, refundCredit } = useContext(ShopContext);
+  const { orders, products, requestExchange, currency } = useContext(ShopContext);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [exchangeItem, setExchangeItem] = useState({ size: "", reason: "", replacementProduct: "" });
   const [submitted, setSubmitted] = useState(false);
