@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { ShopContext } from "../Context/ShopContext";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 const ProfilePage = () => {
-  const { userProfile, getUserProfile, currency, backendUrl, token } = useContext(ShopContext);
+  const { userProfile, getUserProfile, currency} = useContext(ShopContext);
 
   useEffect(() => {
     getUserProfile();

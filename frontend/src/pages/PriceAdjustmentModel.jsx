@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ShopContext } from "../Context/ShopContext";
 
-const PriceAdjustmentModal = ({ priceDifference, onClose, onProceed }) => {
+const PriceAdjustmentModal = (priceDifference, onClose, onProceed) => {
   const { currency } = useContext(ShopContext);
   const [selectedMethod, setSelectedMethod] = useState("stripe");
   const [loading, setLoading] = useState(false);
@@ -30,14 +30,26 @@ const PriceAdjustmentModal = ({ priceDifference, onClose, onProceed }) => {
             </p>
 
             <div className="mb-4">
-              <label className="block mb-1 font-medium">Choose Payment Method:</label>
+              <label className="block mb-1 font-medium">
+                Choose Payment Method:
+              </label>
               <div className="flex flex-col gap-2">
                 <label className="flex items-center gap-2">
-                  <input type="radio" value="stripe" checked={selectedMethod === "stripe"} onChange={() => setSelectedMethod("stripe")} />
+                  <input
+                    type="radio"
+                    value="stripe"
+                    checked={selectedMethod === "stripe"}
+                    onChange={() => setSelectedMethod("stripe")}
+                  />
                   Pay with Stripe
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="radio" value="cod" checked={selectedMethod === "cod"} onChange={() => setSelectedMethod("cod")} />
+                  <input
+                    type="radio"
+                    value="cod"
+                    checked={selectedMethod === "cod"}
+                    onChange={() => setSelectedMethod("cod")}
+                  />
                   Pay via Cash on Delivery
                 </label>
               </div>
@@ -53,11 +65,25 @@ const PriceAdjustmentModal = ({ priceDifference, onClose, onProceed }) => {
         )}
 
         <div className="flex justify-end gap-4">
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose} disabled={loading}>
+          <button
+            className="px-4 py-2 bg-gray-300 rounded"
+            onClick={onClose}
+            disabled={loading}
+          >
             Cancel
           </button>
-          <button className="px-4 py-2 bg-black text-white rounded" onClick={handleProceed} disabled={loading}>
-            {loading ? "Processing..." : priceDifference > 0 ? (selectedMethod === "stripe" ? "Pay with Stripe" : "Pay with COD") : "Confirm"}
+          <button
+            className="px-4 py-2 bg-black text-white rounded"
+            onClick={handleProceed}
+            disabled={loading}
+          >
+            {loading
+              ? "Processing..."
+              : priceDifference > 0
+              ? selectedMethod === "stripe"
+                ? "Pay with Stripe"
+                : "Pay with COD"
+              : "Confirm"}
           </button>
         </div>
       </div>

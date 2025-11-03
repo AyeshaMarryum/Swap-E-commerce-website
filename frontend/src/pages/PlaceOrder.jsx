@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../Components/Title";
 import CartTotal from "../Components/CartTotal";
@@ -26,6 +26,17 @@ const PlaceOrder = () => {
     country: "",
     phone: "",
   });
+
+
+  
+  const isCartEmpty = Object.keys(cartItems).length === 0;
+
+  useEffect(() => {
+    if (isCartEmpty) {
+      toast.error("Your cart is empty");
+      navigate("/");
+    }
+  }, [isCartEmpty, navigate]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -134,14 +145,6 @@ const PlaceOrder = () => {
     return <div className="py-10 text-center text-lg">Loading your cart...</div>;
   }
 
-  const isCartEmpty = Object.keys(cartItems).length === 0;
-
-  useEffect(() => {
-    if (isCartEmpty) {
-      toast.error("Your cart is empty");
-      navigate("/");
-    }
-  }, [isCartEmpty, navigate]);
 
   return (
     <form onSubmit={onSubmitHandler} className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-top">

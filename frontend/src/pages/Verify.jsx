@@ -1,17 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { ShopContext } from '../Context/ShopContext'
 import {useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-
-
-
 
 const Verify = () => {
        const {navigate,token,setCartItems,backendUrl}=useContext(ShopContext)
 const [searchParams, setSearchParams]= useSearchParams()
 const success=searchParams.get('success')
 const orderId= searchParams.get('orderId')
+
+
+console.log("setSearchParams", setSearchParams);
+
+
 const verifyPayment= async()=>{
  
     try {

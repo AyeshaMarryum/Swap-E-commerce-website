@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../Components/Title";
 import { ShopContext } from "../Context/ShopContext";
 import axios from "axios";
 
 // ✅ Feedback Modal Component
-const FeedbackModal = ({ onClose, orderId }) => {
+const FeedbackModal = (onClose, orderId) => {
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -50,7 +50,9 @@ const FeedbackModal = ({ onClose, orderId }) => {
           </h2>
         ) : (
           <>
-            <h2 className="text-xl font-semibold mb-4">We value your feedback!</h2>
+            <h2 className="text-xl font-semibold mb-4">
+              We value your feedback!
+            </h2>
             <form onSubmit={handleSubmit}>
               <textarea
                 className="w-full border border-gray-300 p-3 rounded resize-none"
@@ -85,7 +87,7 @@ const FeedbackModal = ({ onClose, orderId }) => {
 };
 
 // ✅ Track Order Modal
-const TrackOrderModal = ({ status, onClose }) => {
+const TrackOrderModal = (status, onClose) => {
   const steps = ["Pending", "Confirmed", "Shipped", "Delivered"];
 
   return (
@@ -97,7 +99,9 @@ const TrackOrderModal = ({ status, onClose }) => {
             <li
               key={index}
               className={`flex items-center gap-2 ${
-                steps.indexOf(status) >= index ? "text-green-600" : "text-gray-400"
+                steps.indexOf(status) >= index
+                  ? "text-green-600"
+                  : "text-gray-400"
               }`}
             >
               <span className="w-3 h-3 rounded-full border border-gray-400 bg-current"></span>
@@ -129,8 +133,7 @@ const Orders = () => {
 
   // Check if order is eligible for exchange
   const isOrderEligibleForExchange = (order) => {
-    return !order.exchangeRequest && 
-           order.status === "Delivered"; // Only delivered orders can be exchanged
+    return !order.exchangeRequest && order.status === "Delivered"; // Only delivered orders can be exchanged
   };
 
   useEffect(() => {
@@ -194,21 +197,31 @@ const Orders = () => {
           <p className="text-2xl font-bold">{orders.length}</p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Exchange Requests</h3>
+          <h3 className="text-sm font-medium text-gray-500">
+            Exchange Requests
+          </h3>
           <p className="text-2xl font-bold text-blue-600">
-            {orders.filter(order => order.exchangeRequest && order.exchangeRequest.reason).length}
+            {
+              orders.filter(
+                (order) => order.exchangeRequest && order.exchangeRequest.reason
+              ).length
+            }
           </p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Delivered Orders</h3>
+          <h3 className="text-sm font-medium text-gray-500">
+            Delivered Orders
+          </h3>
           <p className="text-2xl font-bold text-green-600">
-            {orders.filter(order => order.status === "Delivered").length}
+            {orders.filter((order) => order.status === "Delivered").length}
           </p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow border">
-          <h3 className="text-sm font-medium text-gray-500">Eligible for Exchange</h3>
+          <h3 className="text-sm font-medium text-gray-500">
+            Eligible for Exchange
+          </h3>
           <p className="text-2xl font-bold text-orange-600">
-            {orders.filter(order => isOrderEligibleForExchange(order)).length}
+            {orders.filter((order) => isOrderEligibleForExchange(order)).length}
           </p>
         </div>
       </div>
@@ -222,11 +235,18 @@ const Orders = () => {
                 className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4"
               >
                 <div className="flex items-start gap-6 text-sm">
-                  <img className="w-12 sm:w-16" src={item?.image?.[0]} alt={item.name} />
+                  <img
+                    className="w-12 sm:w-16"
+                    src={item?.image?.[0]}
+                    alt={item.name}
+                  />
                   <div>
                     <p className="sm:text-base font-medium">{item.name}</p>
                     <div className="flex items-center gap-3 mt-1 text-base text-gray-700">
-                      <p>{currency}{item.price}</p>
+                      <p>
+                        {currency}
+                        {item.price}
+                      </p>
                       <p>Quantity: {item.quantity}</p>
                       <p>Size: {item.size}</p>
                     </div>
@@ -236,34 +256,38 @@ const Orders = () => {
                         {new Date(order.date).toDateString()}
                       </span>
                     </p>
-                    
+
                     {/* Show credit usage information */}
                     {order.creditsUsed > 0 && (
                       <p className="mt-1 text-xs text-green-600 font-medium">
                         💰 {order.creditsUsed} credits applied to this order
                       </p>
                     )}
-                    
+
                     {/* Show original amount if credits were used */}
-                    {order.originalAmount && order.originalAmount !== order.amount && (
-                      <p className="mt-1 text-xs text-gray-500">
-                        Original: {currency}{order.originalAmount} | Final: {currency}{order.amount}
-                      </p>
-                    )}
+                    {order.originalAmount &&
+                      order.originalAmount !== order.amount && (
+                        <p className="mt-1 text-xs text-gray-500">
+                          Original: {currency}
+                          {order.originalAmount} | Final: {currency}
+                          {order.amount}
+                        </p>
+                      )}
                     {/* Show exchange indicator for items in exchanged orders */}
                     {order.exchangeRequest && order.exchangeRequest.reason && (
                       <p className="mt-1 text-xs text-blue-600 font-medium">
                         🔄 This item is part of an exchange request
                       </p>
                     )}
-                    
+
                     {/* Show indicator for orders not eligible for exchange */}
                     {!order.exchangeRequest && order.status !== "Delivered" && (
                       <p className="mt-1 text-xs text-gray-500 font-medium">
-                        📦 Order not delivered yet - exchange available after delivery
+                        📦 Order not delivered yet - exchange available after
+                        delivery
                       </p>
                     )}
-                    
+
                     {/* Show indicator for delivered orders eligible for exchange */}
                     {!order.exchangeRequest && order.status === "Delivered" && (
                       <p className="mt-1 text-xs text-orange-600 font-medium">
@@ -278,17 +302,18 @@ const Orders = () => {
                     <div className="w-2 h-2 rounded-full bg-green-500"></div>
                     <p className="text-base">{order.status || "Confirmed"}</p>
                   </div>
-                  
+
                   {/* Exchange Status Indicator - Only show if order has exchange request */}
                   {order.exchangeRequest && order.exchangeRequest.reason && (
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                       <p className="text-sm text-blue-600">
-                        Exchange: {order.exchangeRequest.exchangeStatus || "Requested"}
+                        Exchange:{" "}
+                        {order.exchangeRequest.exchangeStatus || "Requested"}
                       </p>
                     </div>
                   )}
-                  
+
                   <div className="flex gap-2">
                     <button
                       className="border px-4 py-2 text-sm font-medium rounded-sm"
@@ -296,7 +321,7 @@ const Orders = () => {
                     >
                       Track Order
                     </button>
-                    
+
                     {/* Show appropriate button based on order status */}
                     {order.exchangeRequest && order.exchangeRequest.reason ? (
                       // Order has been exchanged - show Track Exchange
