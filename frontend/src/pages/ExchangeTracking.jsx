@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const ExchangeTracking = () => {
-  const { currency, orders, orderData } = useContext(ShopContext);
+  const { currency, orders, orderData, getUserProfile } = useContext(ShopContext);
   const navigate = useNavigate();
   const [exchangeRequests, setExchangeRequests] = useState([]);
   const [replacementProducts, setReplacementProducts] = useState({});
