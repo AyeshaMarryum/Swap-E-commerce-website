@@ -32,7 +32,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "http://localhost:5174/",
+      "http://localhost:5174",
       "https://swap-ecommerce-admin-37v0p8uli-ayesha-marryums-projects.vercel.app/",
       "https://swap-e-commerce-website.vercel.app/",
     ],
