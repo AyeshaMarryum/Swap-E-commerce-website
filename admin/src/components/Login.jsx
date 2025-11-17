@@ -106,7 +106,7 @@ return (
     {/* Right: Full Image */}
     <div className="hidden md:block md:w-1/2 h-full">
       <img
-        src="/src/assets/Adminlogin01.jpg"
+        src="/public/Adminlogin01.jpg"
         alt="Admin Illustration"
         className="w-full h-full object-cover"
       />
