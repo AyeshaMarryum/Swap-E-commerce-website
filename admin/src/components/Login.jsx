@@ -35,85 +35,94 @@ const Login = ({ setToken }) => {
     } catch (error) {
       console.error("Login error:", error);
       toast.error(
-        error.response?.data?.message || "Something went wrong. Please try again."
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
       );
     } finally {
       setLoading(false);
     }
   };
 
-return (
-  <div className="w-screen h-screen flex">
-    {/* Left: Login Form */}
-    <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-50 px-8">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Admin Panel Login</h1>
-        <form onSubmit={onSubmitHandler}>
-          {/* Email */}
-          <div className="mb-4">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700 mb-1 block">
-              Email Address
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black"
-              required
-              autoComplete="email"
-              placeholder="admin@swap.com"
-            />
-          </div>
+  return (
+    <div className="w-screen h-screen flex">
+      {/* Left: Login Form */}
+      <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-50 px-8">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl font-bold mb-6 text-center">
+            Admin Panel Login
+          </h1>
+          <form onSubmit={onSubmitHandler}>
+            {/* Email */}
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700 mb-1 block"
+              >
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black"
+                required
+                autoComplete="email"
+                placeholder="admin@swap.com"
+              />
+            </div>
 
-          {/* Password */}
-          <div className="mb-4 relative">
-            <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-1 block">
-              Password
-            </label>
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black pr-10"
-              required
-              autoComplete="current-password"
-              placeholder="qwerty123"
-            />
-            <span
-              className="absolute top-[38px] right-3 transform -translate-y-1/2 cursor-pointer text-gray-600"
-              onClick={() => setShowPassword(!showPassword)}
+            {/* Password */}
+            <div className="mb-4 relative">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700 mb-1 block"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black pr-10"
+                required
+                autoComplete="current-password"
+                placeholder="qwerty123"
+              />
+              <span
+                className="absolute top-[38px] right-3 transform -translate-y-1/2 cursor-pointer text-gray-600"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+              </span>
+            </div>
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className={`mt-2 w-full py-2 px-4 rounded-md text-white transition-all ${
+                loading
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-black hover:bg-gray-800"
+              }`}
             >
-              {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-            </span>
-          </div>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+        </div>
+      </div>
 
-          {/* Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className={`mt-2 w-full py-2 px-4 rounded-md text-white transition-all ${
-              loading ? "bg-gray-500 cursor-not-allowed" : "bg-black hover:bg-gray-800"
-            }`}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+      <div className="hidden md:block md:w-1/2 h-full">
+        <img
+          src="/Adminlogin01.jpg"
+          alt="Admin Illustration"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
-
-    {/* Right: Full Image */}
-    <div className="hidden md:block md:w-1/2 h-full">
-      <img
-        src="/src/assets/Adminlogin01.jpg"
-        alt="Admin Illustration"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  </div>
-);
-
+  );
 };
 
 export default Login;
