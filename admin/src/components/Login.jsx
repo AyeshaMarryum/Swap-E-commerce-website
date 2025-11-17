@@ -103,7 +103,6 @@ return (
       </div>
     </div>
 
-    {/* Right: Full Image */}
     <div className="hidden md:block md:w-1/2 h-full">
       <img
         src="/public/Adminlogin01.jpg"
