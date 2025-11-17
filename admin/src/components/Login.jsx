@@ -62,6 +62,7 @@ return (
               className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black"
               required
               autoComplete="email"
+              placeholder="admin@swap.com"
             />
           </div>
 
@@ -78,6 +79,7 @@ return (
               className="rounded-md w-full px-3 py-2 border border-gray-300 outline-none focus:ring-2 focus:ring-black pr-10"
               required
               autoComplete="current-password"
+              placeholder="qwerty123"
             />
             <span
               className="absolute top-[38px] right-3 transform -translate-y-1/2 cursor-pointer text-gray-600"

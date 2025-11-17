@@ -33,8 +33,9 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://swap-ecommerce-admin-37v0p8uli-ayesha-marryums-projects.vercel.app/",
-      "https://swap-e-commerce-website.vercel.app/",
+      "https://swap-ecommerce-admin-37v0p8uli-ayesha-marryums-projects.vercel.app",
+      "https://swap-ecommerce-admin-nwpboaq6l-ayesha-marryums-projects.vercel.app",
+      "https://swap-e-commerce-website.vercel.app",
     ],
     credentials: true,
   })
